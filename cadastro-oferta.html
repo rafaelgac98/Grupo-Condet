@@ -1,0 +1,77 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+     <link rel="stylesheet" href="style.css"> 
+    <!--<link rel="icon" href="Favicon.png">-->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <title>Sistema de Leilão</title>
+</head>
+
+
+<body>
+<html>
+
+    <main class="login-form" >
+        <div class="cotainer" >
+            <div class="row justify-content-center" >
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header" id="saida">Cadastre seu produto</div>
+                        <div class="card-body">
+                            <form action="" method="post">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="from">Nome do produto:</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="from" class="form-control" name="from" required autofocus Size="20" MaxLength="50">
+                                    </div>
+                                </div>
+    
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="bid">Descrição:</label>
+                                    <div class="col-md-6">
+                                        <textarea name="descricao" id="text-descri"  rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="from">Lance mínimo:</label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="valor-lance" class="form-control"  required autofocus Size="20" MaxLength="50">
+                                    </div>
+                                </div>
+
+    
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="button" class="btn btn-primary" onclick="enviaMsg()">
+                                        Enviar
+                                    </button>
+                                    <!--<a href="#" class="btn btn-link">
+                                        Forgot Your Password?
+                                    </a> -->
+                                </div>
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    
+    </main>
+
+</html>
+</body>
