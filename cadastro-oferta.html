@@ -22,6 +22,42 @@
 
 
 <body>
+    <script> 
+
+        function enviaMsg() {
+          const xhttp = new XMLHttpRequest();
+        
+          xhttp.onreadystatechange = function() {
+            console.log("readyState:" + this.readyState);
+            console.log("status:" + this.status);
+        
+            if (this.readyState == 4 && this.status == 200) {
+              imprimeResposta(this);
+              
+            }
+          };
+        
+          xhttp.onload = function() {
+            document.getElementById("resposta").innerHTML = this.responseText;
+          };
+        
+          document.getElementById("saida").innerHTML = "mensagem enviada";
+          var data = {
+          "lance-min":document.getElementById("valor-lance").value,
+          "descri":document.getElementById("text-descri").value,
+          "from":document.getElementById("from").value};
+          var jsondata = JSON.stringify(data);
+          var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto";
+          xhttp.open("POST", url);
+          xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhttp.send(jsondata);
+        }
+        
+        function imprimeResposta(xml) {
+          var xmlDoc = xml.responseXML;
+          document.getElementById("resposta").innerHTML = xmlDoc;
+        }
+        </script>
 <html>
 
     <main class="login-form" >
@@ -40,16 +76,24 @@
                                 </div>
     
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label text-md-right" for="bid">Descrição:</label>
+                                    <label class="col-md-4 col-form-label text-md-right" for="text-descri">Descrição:</label>
                                     <div class="col-md-6">
-                                        <textarea name="descricao" id="text-descri"  rows="3" class="form-control"></textarea>
+                                        <textarea name="text-descri" id="text-descri"  rows="3" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label text-md-right" for="from">Lance mínimo:</label>
+                                    <label class="col-md-4 col-form-label text-md-right" for="valor-lance">Lance mínimo:</label>
                                     <div class="col-md-4">
-                                        <input type="text" id="valor-lance" class="form-control"  required autofocus Size="20" MaxLength="50">
+                                        <input type="text" id="valor-lance" name="valor-lance" class="form-control"  required autofocus Size="20" MaxLength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="checkbox">
+                                            <label>Resposta:</label>
+                                            <span id="resposta">---------</span>
+                                        </div>
                                     </div>
                                 </div>
 
