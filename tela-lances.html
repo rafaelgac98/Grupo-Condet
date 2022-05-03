@@ -1,8 +1,9 @@
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<html>
+
 <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
@@ -20,32 +21,75 @@
   
       <title>Sistema de Leilão</title>
 </head>
-<body>
-    <html>
+
+<script>
+    function CarregaMsg(){
+        const xhttp = new XMLHttpRequest();
+        
+        /*xhttp.onreadystatechange = function() { //Function chamada ao receber resposta
+        if( this.readyState === XMLHttpRequest.DONE && this.status === 200 ) {
+            resposta = JSON.parse(this.responseText);
+            mensagens = JSON.parse(resposta["body"]);
+            imprimeResposta(this); 
+        };*/
+
+        xhttp.onreadystatechange = function() {
+            console.log("readyState:" + this.readyState);
+            console.log("status:" + this.status);
+        
+            if (this.readyState == 4 && this.status == 200) {
+                //imprimeResposta(this);
+              
+            }
+          };
+
     
+        document.getElementById("saida").innerHTML = "mensagem enviada";
+        
+        var teste = document.getElementById("nameProduct").value;
+        var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto";
+        var consulta = "?from=" + teste.value;
+        //document.getElementById("itens").value = url + consulta;
+        xhttp.open("GET", url + consulta); //GET: a consulta vai no cabeçalho com a URL
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send();
+        document.getElementById("itens").innerHTML = xhttp;
+    };
+        
+    function imprimeResposta(xml) {
+        var xmlDoc = xml.responseXML;
+        document.getElementById("itens").innerHTML = xmlDoc;
+    };
+    
+</script>
+
+
+<html>
+    <body>    
         <main class="login-form" >
             <div class="cotainer" >
                 <div class="row justify-content-center" >
                     <div class="col-md-4">
                         <div class="card">
-                            <div class="card-header" id="saida">Cadastre seu produto</div>
+                            <div class="card-header" id="saida">Escolha um produto do Leilão</div>
                             <div class="card-body">
                                 <form action="" method="post">
+                                    <div class="form-group row" >
+                                        <div class="col-md-6">
+                                            <input type="text" id="nameProduct" class="form-control" required name="nameProduct">
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="CarregaMsg()">
+                                            Carregar
+                                        </button>
+                                    </div>
+                                    <br><br>
                                            
                                     <div class="form-group row">
                                         
-                                        <div class="col-md-6">
-                                            <textarea name="descricao" id="text-descri"  rows="6" class="form-control"></textarea>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <textarea name="descricao" id="text-descri"  rows="6" class="form-control"></textarea>
-                                        </div>
-                                    </div>
+                                        <div class="col-md-6"><span id="itens"> Aqui</span></div>
 
-                                    <div class="form-group row">
-                                        
-                                        
                                     </div>
+                                    
                                     
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right" for="from">Lance mínimo:</label>
@@ -61,20 +105,16 @@
                                             Enviar
                                         </button>
                                         <button type="button" class="btn btn-primary"><a href="menu-principal.html" style="color: white;">Voltar</a></button>
-                                        <!--<a href="#" class="btn btn-link">
-                                            Forgot Your Password?
-                                        </a> -->
                                     </div>
     
+                            
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-        
+
         </main>
-    
-    </html>
     </body>
+</html>
