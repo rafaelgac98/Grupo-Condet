@@ -1,7 +1,7 @@
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
 
 <head>
@@ -13,8 +13,8 @@
       <link rel="dns-prefetch" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
   
-       <link rel="stylesheet" href="style.css"> 
-      <!--<link rel="icon" href="Favicon.png">-->
+       <link rel="stylesheet" href="style.css">
+      <link rel="icon" href="Favicon.png">
   
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -22,44 +22,67 @@
       <title>Sistema de Leilão</title>
 </head>
 
+<style>
+    @media (min-width: 767px)
+    {
+
+    }
+</style>
+
 <script>
     function CarregaMsg(){
-        const xhttp = new XMLHttpRequest();
+
+    
+        document.getElementById("saida").innerHTML = "mensagem enviada";
+        var xhttp = new XMLHttpRequest();
+        var produto = document.getElementById("nameProduct").value;
+        var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto?from=" + produto;
+
+        //xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.onload = function () {
+
+                if (xhttp.readyState == 4 && xhttp.status == "200") {
+                    document.getElementById("itens").innerHTML = this.responseText;
+                }
+            }
+        xhttp.open("GET", url, true); //GET: a consulta vai no cabeçalho com a URL
+        xhttp.send();
         
-        /*xhttp.onreadystatechange = function() { //Function chamada ao receber resposta
-        if( this.readyState === XMLHttpRequest.DONE && this.status === 200 ) {
-            resposta = JSON.parse(this.responseText);
-            mensagens = JSON.parse(resposta["body"]);
-            imprimeResposta(this); 
-        };*/
+    };
+        
+    function enviaLance() {
+        const xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
             console.log("readyState:" + this.readyState);
             console.log("status:" + this.status);
-        
-            if (this.readyState == 4 && this.status == 200) {
-                //imprimeResposta(this);
-              
-            }
-          };
 
-    
-        document.getElementById("saida").innerHTML = "mensagem enviada";
+            if (this.readyState == 4 && this.status == 200) {
+            imprimeResposta(this);
+            
+            }
+        };
+
+        xhttp.onload = function() {
+            document.getElementById("resposta").innerHTML = this.responseText;
+        };
+
         
-        var teste = document.getElementById("nameProduct").value;
-        var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto";
-        var consulta = "?from=" + teste.value;
-        //document.getElementById("itens").value = url + consulta;
-        xhttp.open("GET", url + consulta); //GET: a consulta vai no cabeçalho com a URL
+        var data = {
+        "lance":document.getElementById("lance").value,
+        "from":document.getElementById("from").value,
+        "product":document.getElementById("nameProduct").value};
+        var jsondata = JSON.stringify(data);
+        var url = "https://8kt1t5xqu3.execute-api.us-east-1.amazonaws.com/TesteInicial";
+        xhttp.open("POST", url);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send();
-        document.getElementById("itens").innerHTML = xhttp;
-    };
-        
+        xhttp.send(jsondata);
+    }
+
     function imprimeResposta(xml) {
-        var xmlDoc = xml.responseXML;
-        document.getElementById("itens").innerHTML = xmlDoc;
-    };
+  var xmlDoc = xml.responseXML;
+  document.getElementById("resposta").innerHTML = xmlDoc;
+}
     
 </script>
 
@@ -76,35 +99,51 @@
                                 <form action="" method="post">
                                     <div class="form-group row" >
                                         <div class="col-md-6">
-                                            <input type="text" id="nameProduct" class="form-control" required name="nameProduct">
+                                            <input type="text" id="nameProduct" class="form-control" required name="nameProduct" placeholder="Digite o produto">
                                         </div>
-                                        <button type="button" class="btn btn-primary" onclick="CarregaMsg()">
+                                        <div class="col-md-4 float-left">
+                                        <button type="button" class="btn btn-primary float-left" onclick="CarregaMsg()">
                                             Carregar
                                         </button>
-                                    </div>
-                                    <br><br>
-                                           
-                                    <div class="form-group row">
-                                        
-                                        <div class="col-md-6"><span id="itens"> Aqui</span></div>
-
-                                    </div>
-                                    
-                                    
-                                    <div class="form-group row">
-                                        <label class="col-md-4 col-form-label text-md-right" for="from">Lance mínimo:</label>
-                                        <div class="col-md-4">
-                                            <input type="text" id="valor-lance" class="form-control"  required autofocus Size="20" MaxLength="50">
                                         </div>
                                     </div>
-    
-        
-                                    <div class="col-md-8 offset-md-3">
-                                        <button type="button" class="btn btn-primary">Outra oferta</button>
-                                        <button type="button" class="btn btn-primary" onclick="enviaMsg()">
+                                    <br><br>
+                                    <div class="form-group">
+                                        <div class="col-md-6"><span><b>Produto selecionado: </b></span><br><span id="itens">---------</span></div>
+                                        <div class="col-md-6"></div>
+                                            <textarea style="resize: none" class="form-control col-md-8" name="LancesAtt" id="LancesAtt" cols="10" rows="10" readonly></textarea>
+                                        </div>
+                                        
+
+                                    </div>
+
+                                    <!--    <label label class="col-md-4 col-form-label text-md-left" for="from">Nome:</label>-->
+                                    
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <input type="text" id="from" class="form-control" name="from" required autofocus Size="20" MaxLength="50" placeholder="Insira seu nome aqui">
+                                        </div><br>
+                                    
+                                    
+                                    <!--<label class="col-md-4 col-form-label text-md-right" for="lance">Lance mínimo:</label>-->
+                                        <div class="col-md-6">
+                                            <input type="text" id="lance" name="lance" class="form-control"  required autofocus Size="20" MaxLength="50" placeholder="Insira o lance aqui">
+                                        </div><br>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <!--<button type="button" class="btn btn-primary ">Outra oferta</button>-->
+                                        <button type="button" class="btn btn-primary" onclick="enviaLance()">
                                             Enviar
                                         </button>
                                         <button type="button" class="btn btn-primary"><a href="menu-principal.html" style="color: white;">Voltar</a></button>
+                                    </div><br>
+                                    <div class="form-group row">
+                                        <div class="col-md-8">
+                                            <div class="checkbox">
+                                                <label><b>Resposta:</b></label>
+                                                <span id="resposta">---------</span>
+                                            </div>
+                                        </div>
                                     </div>
     
                             
