@@ -33,7 +33,7 @@
     function CarregaMsg(){
 
     
-        document.getElementById("saida").innerHTML = "mensagem enviada";
+        //document.getElementById("saida").innerHTML = "Mensagem recebida";
         var xhttp = new XMLHttpRequest();
         var produto = document.getElementById("nameProduct").value;
         var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto?from=" + produto;
@@ -77,6 +77,10 @@
         xhttp.open("POST", url);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(jsondata);
+        document.getElementById("LancesAtt").innerText = "Lance de R$" +
+                                                        document.getElementById("lance").value + 
+                                                        " para o produto " +
+                                                        document.getElementById("nameProduct").value;
     }
 
     function imprimeResposta(xml) {
