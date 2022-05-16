@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
      <link rel="stylesheet" href="style.css"> 
+     <script src="funcoes.js"></script>
+    <body onload="shUser()">
     <!--<link rel="icon" href="Favicon.png">-->
 
     <!-- Bootstrap CSS -->
@@ -38,14 +40,14 @@
                 <h3>Entrar</h3>
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Seu usuário *" value="" />
+                        <input type="text" class="form-control" id="user" placeholder="Seu usuário *" value="" />
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Sua senha *" value="" />
                     </div>
                     <center>
                         <div class="form-group">
-                            <button type="submit" class="btnSubmit" value="Entrar"><a href="menu-principal.html" style="color: white;">Entrar</a></button>
+                            <button type="submit" class="btnSubmit" value="Entrar" onclick="setUser()">Entrar</button>
                         </div>
                     </center>
                     <!--<div class="form-group">
