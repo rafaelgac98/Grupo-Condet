@@ -35,8 +35,8 @@ body{
 
 .login-form
 {
-    padding-top: 12.5rem;
-    padding-bottom: 12.5rem;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
 }
 
 .login-form .row
@@ -45,6 +45,9 @@ body{
     margin-right: 0;
 }
 
+#LancesAtt{
+    text-align: center;
+}
 
 
 
@@ -102,3 +105,5 @@ body{
     font-weight: 600;
     text-decoration: none;
 }
+
+
