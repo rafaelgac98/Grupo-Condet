@@ -38,14 +38,15 @@
           };
         
           xhttp.onload = function() {
-            document.getElementById("resposta").innerHTML = this.responseText;
+            alert(this.responseText);
           };
         
           document.getElementById("saida").innerHTML = "mensagem enviada";
           var data = {
           "lance-min":document.getElementById("valor-lance").value,
           "descri":document.getElementById("text-descri").value,
-          "from":document.getElementById("from").value};
+          "from":document.getElementById("from").value
+        };
           var jsondata = JSON.stringify(data);
           var url = "https://91qasmc517.execute-api.us-east-1.amazonaws.com/Cadastra-Produto";
           xhttp.open("POST", url);
@@ -88,14 +89,7 @@
                                         <input type="text" id="valor-lance" name="valor-lance" class="form-control"  required autofocus Size="20" MaxLength="50">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
-                                        <div class="checkbox">
-                                            <label>Resposta:</label>
-                                            <span id="resposta">---------</span>
-                                        </div>
-                                    </div>
-                                </div>
+ 
 
     
                                 <div class="col-md-6 offset-md-4">
@@ -108,7 +102,7 @@
                                     </a> -->
                                 </div>
 
-                        </div>
+                            </div>
                         </form>
                     </div>
                 </div>
