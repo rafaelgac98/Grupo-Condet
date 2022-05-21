@@ -24,13 +24,6 @@
       <title>Sistema de Leilão</title>
 </head>
 
-<style>
-    @media (min-width: 767px)
-    {
-
-    }
-</style>
-
 <script>
     function CarregaMsg(){
 
@@ -73,14 +66,15 @@
         
         var data = {
         "lance":document.getElementById("lance").value,
-        "from":document.getElementById("from").value,
+        "from": GetforUser(),
         "product":document.getElementById("nameProduct").value};
         var jsondata = JSON.stringify(data);
-        var url = "https://8kt1t5xqu3.execute-api.us-east-1.amazonaws.com/TesteInicial";
+        var url = "https://7l95hxs1e8.execute-api.us-east-1.amazonaws.com/EstagioCadastraLances";
         xhttp.open("POST", url);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(jsondata);
-        document.getElementById("LancesAtt").innerText = "Lance de R$" +
+        document.getElementById("LancesAtt").innerText = "Lance de "+ GetforUser() + 
+                                                        " no valor de R$" +
                                                         document.getElementById("lance").value + 
                                                         " para o produto " +
                                                         document.getElementById("nameProduct").value;
@@ -120,16 +114,16 @@
                                     </div>
                                     <div class="form-group row col-md-12">    
                                         <div class="col-md-12">
-                                            <textarea style="resize: none" class="form-control col-md-8" name="LancesAtt" id="LancesAtt" cols="10" rows="10" readonly></textarea>
+                                            <textarea style="resize: none" class="form-control col-md-12" name="LancesAtt" id="LancesAtt" cols="10" rows="10" readonly></textarea>
                                         </div>
                                     </div>
 
                                     <!--    <label label class="col-md-4 col-form-label text-md-left" for="from">Nome:</label>-->
                                     
                                     <div class="form-group row col-md-12">
-                                        <div class="col-md-6">
+                                        <!--<div class="col-md-6">
                                             <input type="text" id="from" class="form-control" name="from" required autofocus Size="20" MaxLength="50" placeholder="Insira seu nome aqui">
-                                        </div><br>
+                                        </div><br>-->
                                     
                                     
                                     <!--<label class="col-md-4 col-form-label text-md-right" for="lance">Lance mínimo:</label>-->
