@@ -1,4 +1,6 @@
 
+
+
 /*function shUser() { // Exibe os valores de "username" e "expires" no cookie
   let c = "username: " + getUser() + " - expires: " + getExpires();
   document.getElementById( "saida" ).innerHTML = c;

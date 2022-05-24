@@ -20,6 +20,32 @@
   
       <title>Sistema de Leilão</title>
 </head>
+
+<script>
+
+function getUser1() { // Procura o valor da chave "username" no cookie
+let decodedCookie = decodeURIComponent(document.cookie); // Limpa caracteres especiais no cookie
+  let ca = decodedCookie.split( ';' ); // Quebra o cookie numa lista de strings nos ";"
+  for( let i = 0; i < ca.length; i++ )
+    if( ca[i].indexOf( "username=" ) == 0 ) // Se tem a chave "username="
+      return ca[i].substring( "username=".length, ca[i].length ) // retorna seu valor
+
+    return "";
+}
+
+window.onload = function(){
+    if( getUser1() != "" ){
+        //return window.location.href = "menu-principal.html";
+        
+    }else {
+        alert("Acesso proibido");
+        alert("Efetue Logon!");
+        window.location.href = "login.html"
+    }
+}
+
+</script>
+
 <body>
 <html>
     <main class="login-form" >
